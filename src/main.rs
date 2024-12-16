@@ -36,7 +36,7 @@ fn main() {
 *                                                              *
 *                                                              *
 ****************************************************************
-        ".to_string();
+    ".to_string();
     let s = vec![
         "/* Conway's Quine  */",
         "/* Written by Cole */",
@@ -48,7 +48,7 @@ fn main() {
         "    let s = vec![",
         "    ];",
         "    let rows = 32;",
-        "    let cols = 64;", 
+        "    let cols = 64;",
         "    let dirs = [(-1, -1),(-1, 0),(-1, 1),",
         "                (0, -1),          (0, 1),",
         "                (1, -1),  (1, 0), (1, 1),];",
@@ -58,14 +58,14 @@ fn main() {
         "        for col_idx in 1..cols + 1 {",
         "            let idx = row_idx * (cols + 1) + col_idx;",
         "            if idx >= board.len() {",
-        "               break;",
-        "           }",
+        "                break;",
+        "            }",
         "            if board_chars[idx] == ' ' || board_chars[idx] == 'x' {",
         "                let mut alive_neighbors = 0;",
         "                for &(row_offset, col_offset) in &dirs {",
         "                    let neighbor_row = row_idx as isize + row_offset;",
         "                    let neighbor_col = col_idx as isize + col_offset;",
-        "                    if neighbor_row > 0 && neighbor_row < rows as isize - 1",        
+        "                    if neighbor_row > 0 && neighbor_row < rows as isize - 1",
         "                        && neighbor_col > 0 && neighbor_col < cols as isize - 1 {",
         "                        let neighbor_index = (neighbor_row as usize) * (cols + 1) + (neighbor_col as usize);",
         "                        if board_chars[neighbor_index] == 'x' {",
@@ -127,8 +127,8 @@ fn main() {
                 (1, -1),  (1, 0), (1, 1),];
     let mut board_chars: Vec<char> = board.chars().collect();
     let mut swap_indices: Vec<usize> = vec![];
-    for row_idx in 0..rows {
-        for col_idx in rows..cols {
+    for row_idx in 1..rows + 1 {
+        for col_idx in 1..cols + 1 {
             let idx = row_idx * (cols + 1) + col_idx;
             if idx >= board.len() {
                 break;
@@ -138,13 +138,9 @@ fn main() {
                 for &(row_offset, col_offset) in &dirs {
                     let neighbor_row = row_idx as isize + row_offset;
                     let neighbor_col = col_idx as isize + col_offset;
-                    if neighbor_row > 0
-                        && neighbor_row < rows as isize - 1
-                        && neighbor_col > 0
-                        && neighbor_col < cols as isize - 1
-                    {
-                        let neighbor_index =
-                            (neighbor_row as usize) * (cols + 1) + (neighbor_col as usize);
+                    if neighbor_row > 0 && neighbor_row < rows as isize - 1
+                        && neighbor_col > 0 && neighbor_col < cols as isize - 1 {
+                        let neighbor_index = (neighbor_row as usize) * (cols + 1) + (neighbor_col as usize);
                         if board_chars[neighbor_index] == 'x' {
                             alive_neighbors += 1;
                         }
